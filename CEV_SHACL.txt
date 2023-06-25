@@ -1,0 +1,205 @@
+@prefix fdt: <http://w3id.org/fdt/> .
+@prefix cev: <http://w3id.org/cev/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Shape for a Train
+fdt:TrainShape a sh:NodeShape ;
+    sh:targetClass fdt:Train ;
+    sh:property [
+        sh:path fdt:requiredComputingEnvironment ;
+        sh:node cev:ComputingEnvironmentShape ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ].
+
+# Shape for a Data Station
+fdt:DataStationShape a sh:NodeShape ;
+    sh:targetClass fdt:DataStation ;
+    sh:property [
+        sh:path fdt:hasComputingEnvironment ;
+        sh:node cev:ComputingEnvironmentShape ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ].
+
+# Shape for Computing Environment
+cev:ComputingEnvironmentShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:hasCPU ;
+        sh:node cev:CPUShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasGPU ;
+        sh:node cev:GPUShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasRAM ;
+        sh:node cev:RAMShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasStorage ;
+        sh:node cev:StorageShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasDataTransferRate ;
+        sh:node cev:DataTransferRateShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# CPU Shape
+cev:CPUShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:cpuCoresAmount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasCPUCore ;
+        sh:node cev:CoreShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasCPUFLOPS ;
+        sh:node cev:CPUFLOPSShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# GPU Shape
+cev:GPUShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:coresAmount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasGPUFLOPS ;
+        sh:node cev:GPUFLOPSShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasVRAM ;
+        sh:node cev:VRAMShape ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# GPU FLOPS Shape
+cev:GPUFLOPSShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:hasFLOPSUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:flopsAmount ;
+        sh:datatype xsd:float ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+	
+# CPU FLOPS Shape
+cev:CPUFLOPSShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:hasFLOPSUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:flopsAmount ;
+        sh:datatype xsd:float ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# Core Shape
+cev:CoreShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:hasCoreSpeedUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:coreClockSpeedAmount ;
+        sh:datatype xsd:float ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# VRAM Shape
+cev:VRAMShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:vramAmount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasStorageUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# RAM Shape
+cev:RAMShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:ramAmount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasStorageUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# Storage Shape
+cev:StorageShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:storageAmount ;
+        sh:datatype xsd:integer ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasStorageUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
+# Data Transfer Rate Shape
+cev:DataTransferRateShape a sh:NodeShape ;
+    sh:property [
+        sh:path cev:dataTransferRateAmount ;
+        sh:datatype xsd:float ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path cev:hasDataTransferRateUnit ;
+        sh:datatype xsd:literal ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ].
+
